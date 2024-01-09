@@ -24,6 +24,12 @@ services:
         public: true
     App\Service\Phones:
         class: App\Service\Phones
-        public: true        
+        public: true
+    App\Service\Authors:
+        class: App\Service\Authors
+        public: true
+    App\Service\Articles:
+        class: App\Service\Articles
+        public: true            
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

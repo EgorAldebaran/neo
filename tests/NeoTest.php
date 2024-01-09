@@ -7,6 +7,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Contract\HttpClient\HttpClientInterface;
 use App\Service\Users;
 use App\Service\Phones;
+use Carbon\Carbon;
+use App\Entity\User;
+use App\Entity\PhoneNumbers;
 
 class NeoTest extends KernelTestCase
 {
@@ -35,7 +38,25 @@ class NeoTest extends KernelTestCase
 
     public function testAvadaKedavra()
     {
+        $this->assertTrue(true);
         var_dump ('---avada kedavra---');
+        $info = Carbon::create(2001, 10, 9, 14, 10, 15);
+        //var_dump ($info->toDateTimeString());
+
+        $qm = $this->doctrine->createQueryBuilder();
+        $qm
+            ->select('u.name, count(p.phone) as phone_count')
+            ->from(User::class, 'u')
+            ->innerJoin(PhoneNumbers::class, 'p', 'WITH', 'u.id=p.user')
+            ->where(
+                $qm->expr()->between('u.birth_date', ':minAge', ':maxAge')
+            )
+            ->setParameter('minAge', 8)
+            ->setParameter('maxAge', 42)
+            ->groupBy('u.name');
+
+        $info = $qm->getQuery();
+        var_dump ($info);
     }
     
     public function lltestAvadaKedavra()

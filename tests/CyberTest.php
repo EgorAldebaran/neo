@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Contract\HttpClient\HttpClientInterface;
 use App\Service\Users;
 use App\Service\Phones;
+use Carbon\Carbon;
 
 class CyberTest extends KernelTestCase
 {
@@ -32,14 +33,15 @@ class CyberTest extends KernelTestCase
         $this->user = static::$kernel->getContainer()->get(Users::class)->getInstance();
         $this->phone = static::$kernel->getContainer()->get(Phones::class)->getInstance();
     }
-    
+
     public function testCreate0()
     {
         var_dump ('---avada kedavra---');
+        $birth_date = Carbon::create(2001, 10, 9);
 
         $this->user->setName('Dolly Dolores');
         $this->user->setGender(2);
-        $this->user->setBirthDate('2001-10-09');
+        $this->user->setBirthDate($birth_date);
 
         $this->phone->setUser($this->user);
         $this->phone->setPhone('8777788473');
@@ -54,7 +56,7 @@ class CyberTest extends KernelTestCase
     {
         $this->user->setName('Look  Informer');
         $this->user->setGender(1);
-        $this->user->setBirthDate('2001-11-09');
+        $this->user->setBirthDate(Carbon::create(2005, 10, 4));
 
         $this->phone->setUser($this->user);
         $this->phone->setPhone('8777788873');
@@ -69,7 +71,7 @@ class CyberTest extends KernelTestCase
     {
         $this->user->setName('Jacke Diamonds');
         $this->user->setGender(1);
-        $this->user->setBirthDate('1999-11-09');
+        $this->user->setBirthDate(Carbon::create(1999, 10, 10));
 
         $this->phone->setUser($this->user);
         $this->phone->setPhone('8777788873');
@@ -84,7 +86,7 @@ class CyberTest extends KernelTestCase
     {
         $this->user->setName('Queen Hearts');
         $this->user->setGender(2);
-        $this->user->setBirthDate('2001-01-09');
+        $this->user->setBirthDate(Carbon::create(2006, 4, 5));
 
         $this->phone->setUser($this->user);
         $this->phone->setPhone('8777788873');
@@ -99,7 +101,7 @@ class CyberTest extends KernelTestCase
     {
         $this->user->setName('Dick Dickson');
         $this->user->setGender(1);
-        $this->user->setBirthDate('2001-11-09');
+        $this->user->setBirthDate(Carbon::create(2012, 1, 1));
 
         $this->phone->setUser($this->user);
         $this->phone->setPhone('8777788873');
